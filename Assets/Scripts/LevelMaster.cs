@@ -30,8 +30,10 @@ public class LevelMaster : MonoBehaviour {
 	float ratio = 10;
 	TextAsset highscore;
 	//public GameObject scoreobject;
-	private int bestscore;
-
+	public int bestscore;
+	public Object[] pipeobjects;
+	float stopspeed=0;
+	float startspeed = 0.7f;
 //	string FileLoc = "\Resources\HighScores.txt";
 	// Use this for initialization
 	void Awake()
@@ -44,7 +46,7 @@ public class LevelMaster : MonoBehaviour {
 
 		counter = 4;
 		Time.timeScale = 1;
-		ParentPipe = GameObject.FindGameObjectWithTag("ParentPipe");
+		//ParentPipe = GameObject.FindGameObjectWithTag("ParentPipe");
 		//lastInstantiated = GameObject.FindGameObjectWithTag("LastInstantiated");
 		//scorecard = (GUIText)GameObject.FindGameObjectWithTag("scorecard");
 		float finalSize = (float)Screen.width/ratio;
@@ -52,10 +54,12 @@ public class LevelMaster : MonoBehaviour {
 		//scorecard1.pixelOffset =  new Vector2(Screen.width/offset.x, Screen.height/offset.y);
 		//scoreboard.transform.position = new Vector2(Screen.width/, Screen.height*0.2f);
 		 SCStyle.fontSize = (int) finalSize;
-
-
+	 	pipeobjects = FindObjectsOfType (typeof(Pipe));
+		foreach (Pipe go in pipeobjects) {
+			go.SendMessage ("UpdateSpeed",stopspeed);
 	}
 	
+	}
 	// Update is called once per frame
 	void Update () 
 	{
@@ -115,9 +119,9 @@ public class LevelMaster : MonoBehaviour {
 	void SetGameBeganVariable()
 	{
 		this.gamebegan = true;
-		Object[] pipeobjects = FindObjectsOfType (typeof(Pipe));
-		foreach (GameObject go in pipeobjects) {
-			go.SendMessage ("UpdateSpeed");
+
+		foreach (Pipe go in pipeobjects) {
+			go.SendMessage ("UpdateSpeed", startspeed);
 		}
 
 	}
@@ -203,8 +207,8 @@ public class LevelMaster : MonoBehaviour {
 		if(bestscore < score)
 		{
 			bestscore = score;
-			PlayerPrefs.SetInt("bestscore", bestscore);
-
+			PlayerPrefs.SetInt("BestScore", bestscore);
+			PlayerPrefs.Save();
 		}
 	}
 

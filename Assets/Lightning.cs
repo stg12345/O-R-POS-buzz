@@ -5,6 +5,7 @@ public class Lightning : MonoBehaviour {
 	float speed = 0.7f;
 	// Use this for initialization
 	GameObject levelmaster;
+	public AudioClip lightningpickup;
 	bool scoresubmitted;
 	void Start () {
 	levelmaster = GameObject.FindGameObjectWithTag("LevelMaster");
@@ -32,6 +33,7 @@ public class Lightning : MonoBehaviour {
 		{
 		levelmaster.SendMessage("AddScore");
 			this.scoresubmitted = true;
+			audio.PlayOneShot(lightningpickup);
 			Destroy(gameObject);
 		}
 	}

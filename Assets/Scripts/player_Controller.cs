@@ -8,8 +8,9 @@ public class player_Controller : MonoBehaviour {
 	public bool GameOver = false;
 	public GameObject levelmaster;
 	Vector2 ball_loc;
-	public AudioClip fast;
-	public AudioClip slow;
+	//public AudioClip fast;
+	public AudioClip gameoverbuzz;
+	//public AudioClip slow;
 	Collider2D Other;
 	bool gamebeginmsgsent;
 	// Use this for initialization
@@ -19,6 +20,7 @@ public class player_Controller : MonoBehaviour {
 		if(GameOver == false)
 		{
 			animator.SetInteger("BallState",0);
+
 		}
 
 	}
@@ -31,17 +33,25 @@ public class player_Controller : MonoBehaviour {
 }
 	void FixedUpdate()
 	{
-		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) 
+		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) 
 		{
 			if(!gamebeginmsgsent == true)
 			{
 				levelmaster.SendMessage("SetGameBeganVariable");
 				gamebeginmsgsent = true;
+
 			}
-
-
+		}
+			if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) 
 			//MagnitudeVector = (Input.GetTouch(0).deltaPosition/Input.GetTouch(0).deltaTime);
 			transform.Translate(new Vector3(0,1,0) * Speed * Time.deltaTime * Input.GetTouch(0).deltaPosition.y/30);
+
+
+		if (Input.GetButton("Jump"))
+		{
+			levelmaster.SendMessage("SetGameBeganVariable");
+			gamebeginmsgsent = true;
+			//audio.Play();
 
 		}
 	}
@@ -72,6 +82,7 @@ public class player_Controller : MonoBehaviour {
 		if(other.gameObject.layer ==12)
 		{
 			audio.Stop();
+			audio.PlayOneShot(gameoverbuzz);
 			//other.SendMessage("PlayAudio");
 			//audio.PlayOneShot(fast);
 			//audio.PlayDelayed(3);

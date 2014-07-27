@@ -1,9 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LevelMaster.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\player_Controller.cs">
     <Files>
-      <File FileName="Assets\Scripts\LevelMaster.cs" Line="98" Column="10" />
-      <File FileName="Assets\Scripts\player_Controller.cs" Line="63" Column="24" />
+      <File FileName="Assets\Scripts\HomePage.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LevelMaster.cs" Line="54" Column="36" />
+      <File FileName="Assets\Scripts\Pipe.cs" Line="33" Column="17" />
+      <File FileName="Assets\Scripts\player_Controller.cs" Line="52" Column="49" />
+      <File FileName="Assets\Lightning.cs" Line="36" Column="39" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

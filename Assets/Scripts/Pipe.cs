@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Pipe : MonoBehaviour {
-	float speed = 0.0f;
+	public float speed = 0.7f;
 	public GameObject  tailob;
 	GameObject levelmaster;
 	Vector2 pipe_loc;
@@ -28,9 +28,9 @@ public class Pipe : MonoBehaviour {
 		transform.position = pipe_loc;
 	}
 
-	void UpdateSpeed()
+	void UpdateSpeed(float f)
 	{
-		this.speed = 0.07f;
+		this.speed = f;
 	}
 	/* GameObject getTailOb()
 	{

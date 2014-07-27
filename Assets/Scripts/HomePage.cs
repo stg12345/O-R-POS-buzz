@@ -5,9 +5,10 @@ public class HomePage : MonoBehaviour {
 	public GUITexture playbutton;
 	public GUITexture ratingstar;
 	public GUITexture leaderboard;
+	//public AudioClip mainmenumusic;
 	// Use this for initialization
 	void Start () {
-
+		audio.Play();
 	}
 	
 	// Update is called once per frame
