@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{F01121BC-1953-31AD-8C1F-D48EAA2739D8}") = "Buzzinga", "Assembly-CSharp.csproj", "{29552E30-89AA-8DA8-2D10-63D20F4F72A9}"
 EndProject
+Project("{F01121BC-1953-31AD-8C1F-D48EAA2739D8}") = "Buzzinga", "Assembly-CSharp-Editor.csproj", "{8C691013-24B6-7089-F5C2-1E812A8AE257}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,11 +15,15 @@ Global
 		{29552E30-89AA-8DA8-2D10-63D20F4F72A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29552E30-89AA-8DA8-2D10-63D20F4F72A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29552E30-89AA-8DA8-2D10-63D20F4F72A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C691013-24B6-7089-F5C2-1E812A8AE257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C691013-24B6-7089-F5C2-1E812A8AE257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C691013-24B6-7089-F5C2-1E812A8AE257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C691013-24B6-7089-F5C2-1E812A8AE257}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																												GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

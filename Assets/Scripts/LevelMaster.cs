@@ -31,7 +31,7 @@ public class LevelMaster : MonoBehaviour {
 	TextAsset highscore;
 	//public GameObject scoreobject;
 	public int bestscore;
-	public Object[] pipeobjects;
+	public Object[] pipeobjectsarray;
 	float stopspeed=0;
 	float startspeed = 0.7f;
 //	string FileLoc = "\Resources\HighScores.txt";
@@ -54,8 +54,8 @@ public class LevelMaster : MonoBehaviour {
 		//scorecard1.pixelOffset =  new Vector2(Screen.width/offset.x, Screen.height/offset.y);
 		//scoreboard.transform.position = new Vector2(Screen.width/, Screen.height*0.2f);
 		 SCStyle.fontSize = (int) finalSize;
-	 	pipeobjects = FindObjectsOfType (typeof(Pipe));
-		foreach (Pipe go in pipeobjects) {
+	 	pipeobjectsarray = FindObjectsOfType (typeof(Pipe));
+		foreach (Pipe go in pipeobjectsarray) {
 			go.SendMessage ("UpdateSpeed",stopspeed);
 	}
 	
@@ -87,13 +87,14 @@ public class LevelMaster : MonoBehaviour {
 				return;*/
 				Application.LoadLevel("MainMenu");
 		  }
+		}
 			if(gamebegan == true)
 			{
 				Destroy(scrollupimg);
 				Destroy(scrollimg);
 				Destroy(scrolldownimg);
 			}
-		}
+
 
 	}
 	void OnPauseGame()
@@ -120,7 +121,7 @@ public class LevelMaster : MonoBehaviour {
 	{
 		this.gamebegan = true;
 
-		foreach (Pipe go in pipeobjects) {
+		foreach (Pipe go in pipeobjectsarray) {
 			go.SendMessage ("UpdateSpeed", startspeed);
 		}
 

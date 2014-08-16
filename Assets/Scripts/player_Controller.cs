@@ -42,9 +42,12 @@ public class player_Controller : MonoBehaviour {
 
 			}
 		}
+		if(gamebeginmsgsent = true)
+		{
 			if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) 
 			//MagnitudeVector = (Input.GetTouch(0).deltaPosition/Input.GetTouch(0).deltaTime);
 			transform.Translate(new Vector3(0,1,0) * Speed * Time.deltaTime * Input.GetTouch(0).deltaPosition.y/30);
+		}
 
 
 		if (Input.GetButton("Jump"))
