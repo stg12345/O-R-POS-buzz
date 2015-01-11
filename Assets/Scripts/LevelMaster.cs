@@ -5,16 +5,17 @@ using System.IO;
 
 public class LevelMaster : MonoBehaviour {
 	//public GameObject beginner;
-	int counter;
+	public int counter;
  	public	GameObject lastInstantiated;
 	GameObject ParentPipe;
-	Vector2 iPosition;
+	//Vector2 iPosition;
 	public GameObject[] p = new GameObject[2];
 	public Vector2 ball_loc;
 	public GameObject ballprefab;
 	int ballcounter = 1;
+	bool gameover = false;
 	//public GameObject jumpobj;
-	int score = 0;
+	int score=0;
 	public string Score = "0";
 	//public List<GameObject> currentobjects = new List<GameObject>();
 	public GameObject lightning;
@@ -24,9 +25,11 @@ public class LevelMaster : MonoBehaviour {
 	public GameObject scrollupimg;
 	public GameObject scrolldownimg;
 	public GameObject scrollimg;
+	public static string Username;
+	public static Texture UserTexture;
 	bool gamebegan = false;
 	public GUIStyle SCStyle; //Score Styling for numbers
-	//Vector2 offset = new Vector2(2,2 );
+	//Vector2 offset = new Vectorload2(2,2 );
 	float ratio = 10;
 	TextAsset highscore;
 	//public GameObject scoreobject;
@@ -38,7 +41,7 @@ public class LevelMaster : MonoBehaviour {
 	// Use this for initialization
 	void Awake()
 	{
-		PlayerPrefs.SetInt("Score",score);
+		DontDestroyOnLoad(this);
 		bestscore = PlayerPrefs.GetInt("BestScore");
 
 	}
@@ -66,9 +69,8 @@ public class LevelMaster : MonoBehaviour {
 
 		if(counter < 4)
 		{
-			GetPosition();
-
-			InstantiatePipe();
+			Vector2 ipos = GetPosition();
+			InstantiatePipe(ipos);
 		}
 		if (Application.platform == RuntimePlatform.Android)
 		{
@@ -90,33 +92,34 @@ public class LevelMaster : MonoBehaviour {
 		}
 			if(gamebegan == true)
 			{
-				Destroy(scrollupimg);
-				Destroy(scrollimg);
-				Destroy(scrolldownimg);
+				GameObject.DestroyObject(scrollupimg);
+				GameObject.DestroyObject(scrollimg);
+				GameObject.DestroyObject(scrolldownimg);
 			}
 
 
 	}
-	void OnPauseGame()
-	{
+	/*void OnPauseGame()
+	/*{
 		/*
     Object[] objects = FindObjectsOfType (typeof(GameObject));
     foreach (GameObject go in objects) {
     go.SendMessage ("OnPauseGame", SendMessageOptions.DontRequireReceiver);
     }
-    */
-	}
-
-	void OnResumeGame()
-	{
-
-	}
+	
+	}*/
 
 	void ReduceCounter()
 	{
 		this.counter -= 1;
-		Debug.Log (counter);
+	
 	}
+
+	void setGameOver()
+	{
+		this.gameover = true;
+	}
+
 	void SetGameBeganVariable()
 	{
 		this.gamebegan = true;
@@ -126,36 +129,45 @@ public class LevelMaster : MonoBehaviour {
 		}
 
 	}
-	void InstantiatePipe()
+	void InstantiatePipe(Vector2 v2)
 	{	
+
+		if(counter == 3)
+		{
 		//Debug.Log("IP");
+		Debug.Log ("counter" +counter);
 		int r = Random.Range(0,2);
 		Debug.Log(lastInstantiated.transform.position);
-		lastInstantiated = Instantiate(p[r], iPosition, Quaternion.identity) as GameObject;
-		//currentobjects.Add(lastInstantiated);
+		lastInstantiated = Instantiate(p[r], v2, Quaternion.identity) as GameObject;
 		this.counter +=1;
+		//currentobjects.Add(lastInstantiated);
+		}
+
+
 	}
 
-	void GetPosition()
+	Vector2 GetPosition()
 	{
 		//lastInstantiated.SendMessage("RetrievePosition");
-
+		Vector2 ipos = new Vector2(0,0);
 		foreach (Transform t in lastInstantiated.transform)
 		{	
 			if(t.tag == "TailOb")
 			{	Debug.Log(t.position);
 				//levelmaster.SendMessage("ChangePosition", (Vector2) t.position);
-				iPosition = t.position;
-
+				//iPosition = t.position;
+				ipos = t.position;
 			}
+
 		}
+		return ipos;
 	}
 
-	void GetBallLoc(Vector3 BL)
+	/*void GetBallLoc(Vector3 BL)
 	{
 		ball_loc = (Vector2) BL;
 
-	}
+	}*/
 	/*void GameResume()
 	{
 		if(ballcounter < 1)
@@ -187,10 +199,10 @@ public class LevelMaster : MonoBehaviour {
 			currentobjects[i-1] = currentobjects[i];
 		}*/
 
-	void JumpObjManager()
+	/*void JumpObjManager()
 	{
 		//jumpobj.SetActive(true);
-	}
+	}*/
 
 	void LoadLoserBaby()
 	{
@@ -203,6 +215,7 @@ public class LevelMaster : MonoBehaviour {
 		//scorecard1.text = score.ToString();
 		//Debug.Log(score);
 		Score = score.ToString();
+
 		//scoreobject.SendMessage("UpdateScore",Score);
 		PlayerPrefs.SetInt("Score",score);
 		if(bestscore < score)
@@ -213,10 +226,19 @@ public class LevelMaster : MonoBehaviour {
 		}
 	}
 
+	public void resetScore()
+	{
+		this.score = 0;
+	}
+
+
 	void OnGUI()
 	{
 
-		GUI.Label(new Rect(Screen.width*0.2f, Screen.height*0.08f, Screen.width*0.2f, Screen.height*0.1f),Score,new GUIStyle (SCStyle));
+		if(gameover ==  false)
+		{
+			GUI.Label(new Rect(Screen.width*0.2f, Screen.height*0.08f, Screen.width*0.2f, Screen.height*0.1f),Score, (SCStyle));
+		}
 	}
 
 	/*void ChangePosition(Vector2 v)

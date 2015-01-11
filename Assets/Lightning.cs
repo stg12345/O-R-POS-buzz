@@ -29,12 +29,17 @@ public class Lightning : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
+		if(other.gameObject.tag == "Player")
+		{
 		if (scoresubmitted == false)
 		{
-		levelmaster.SendMessage("AddScore");
+				AudioSource.PlayClipAtPoint(lightningpickup,this.transform.position);
+			levelmaster.SendMessage("AddScore");
 			this.scoresubmitted = true;
-			audio.PlayOneShot(lightningpickup);
 			Destroy(gameObject);
+
+
+		}
 		}
 	}
 }

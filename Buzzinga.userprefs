@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\player_Controller.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\HighScores.txt">
     <Files>
-      <File FileName="Assets\Scripts\player_Controller.cs" Line="67" Column="23" />
-      <File FileName="Assets\Scripts\LevelMaster.cs" Line="145" Column="23" />
+      <File FileName="Assets\Scripts\GUIAspectRatio.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\HighScores.txt" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

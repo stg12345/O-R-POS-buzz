@@ -17,7 +17,7 @@ public class DestroyPlane : MonoBehaviour {
 		if(other.gameObject.layer == 8)
 		{
 		Destroy(other.gameObject);
-		//Debug.Log ("collision"); 
+		Debug.Log ("collision"); 
 			levelmaster.SendMessage("ReduceCounter",1);
 		}
 		if(other.gameObject.layer == 9)
