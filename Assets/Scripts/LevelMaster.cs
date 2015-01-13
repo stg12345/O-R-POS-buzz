@@ -15,7 +15,7 @@ public class LevelMaster : MonoBehaviour {
 	int ballcounter = 1;
 	bool gameover = false;
 	//public GameObject jumpobj;
-	int score=0;
+	int score;
 	public string Score = "0";
 	//public List<GameObject> currentobjects = new List<GameObject>();
 	public GameObject lightning;
@@ -37,6 +37,8 @@ public class LevelMaster : MonoBehaviour {
 	public Object[] pipeobjectsarray;
 	float stopspeed=0;
 	float startspeed = 0.7f;
+	public GameObject googleadsobject;
+
 //	string FileLoc = "\Resources\HighScores.txt";
 	// Use this for initialization
 	void Awake()
@@ -46,7 +48,7 @@ public class LevelMaster : MonoBehaviour {
 
 	}
 	void Start () {
-
+		score = 0;
 		counter = 4;
 		Time.timeScale = 1;
 		//ParentPipe = GameObject.FindGameObjectWithTag("ParentPipe");
@@ -61,7 +63,8 @@ public class LevelMaster : MonoBehaviour {
 		foreach (Pipe go in pipeobjectsarray) {
 			go.SendMessage ("UpdateSpeed",stopspeed);
 	}
-	
+		googleadsobject = GameObject.FindGameObjectWithTag("GoogleAdsObject");
+		googleadsobject.SendMessage("requestInterstitialAd", SendMessageOptions.DontRequireReceiver);
 	}
 	// Update is called once per frame
 	void Update () 
@@ -87,6 +90,7 @@ public class LevelMaster : MonoBehaviour {
 				jumpobj.SetActive(false);
 			}
 				return;*/
+				gameover = true;
 				Application.LoadLevel("MainMenu");
 		  }
 		}
@@ -118,6 +122,7 @@ public class LevelMaster : MonoBehaviour {
 	void setGameOver()
 	{
 		this.gameover = true;
+
 	}
 
 	void SetGameBeganVariable()
@@ -206,7 +211,12 @@ public class LevelMaster : MonoBehaviour {
 
 	void LoadLoserBaby()
 	{
+		//googleadsobject.SendMessage("requestInterstitialAd", SendMessageOptions.DontRequireReceiver);
+		//googleadsobject.SendMessage("RequestBanner", SendMessageOptions.DontRequireReceiver);
+
 		Application.LoadLevel("LoserBaby");
+		googleadsobject.SendMessage("displayInterstitialAd", SendMessageOptions.DontRequireReceiver);
+
 	}
 
 	void AddScore()

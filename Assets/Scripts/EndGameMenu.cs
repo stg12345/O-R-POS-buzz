@@ -13,7 +13,7 @@ public class EndGameMenu : MonoBehaviour {
 	public GUIText bestcard;
 	//public GameObject scoreobject;
 	int score,bestscore;
-
+	GameObject googleadsobject;
 	// Use this for initialization
 	void Awake()
 	{
@@ -30,6 +30,12 @@ public class EndGameMenu : MonoBehaviour {
 		finalSize = (float) Screen.width/ratio;
 		bestcard.fontSize = (int) finalSize;
 		scorecard.fontSize = (int) finalSize;
+		googleadsobject = GameObject.FindGameObjectWithTag("GoogleAdsObject");
+		googleadsobject.SendMessage("destroyInterstitialAd", SendMessageOptions.DontRequireReceiver);
+		if(googleadsobject != null)
+		{
+			googleadsobject.SendMessage("RequestBanner", SendMessageOptions.DontRequireReceiver);
+		}
 	}
 	
 	// Update is called once per frame
@@ -39,6 +45,9 @@ public class EndGameMenu : MonoBehaviour {
 		{
 			if (newgame.HitTest(Input.GetTouch(0).position))
 			{
+				googleadsobject.SendMessage("addPlayCount",SendMessageOptions.DontRequireReceiver);
+				googleadsobject.SendMessage("hideBannerAd",SendMessageOptions.DontRequireReceiver);
+				googleadsobject.SendMessage("destroyBannerAd",SendMessageOptions.DontRequireReceiver);
 				Application.LoadLevel("MainLevelDemo");
 			}
 			if(leaderboard.HitTest(Input.GetTouch(0).position))

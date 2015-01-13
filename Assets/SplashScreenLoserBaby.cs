@@ -157,6 +157,7 @@ public class SplashScreenLoserBaby : MonoBehaviour
 			alpha += -fadeSpeed * Time.deltaTime;
 			break;
 		}
+
 	}
 	
 	void OnGUI()

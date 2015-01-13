@@ -64,14 +64,15 @@ public class player_Controller : MonoBehaviour {
 			}
 		}
 
+#if UNITY_EDITOR
 
 		if (Input.GetButton("Jump"))
 		{
 			levelmaster.SendMessage("SetGameBeganVariable");
 			gamebeginmsgsent = true;
 			//audio.Play();
-
 		}
+#endif
 	}
 	IEnumerator OnCollisionEnter2D(Collision2D other)
 	{	
@@ -82,18 +83,7 @@ public class player_Controller : MonoBehaviour {
 			GameOver = true;
 			levelmaster.SendMessage("setGameOver");
 			PlayerPrefs.Save();
-			
-			//gameObject.rigidbody2D.gravityScale = 15;
-			//gameObject.rigidbody2D.isKinematic = false;
-			//levelmaster.SendMessage("JumpObjManager");
-			//levelmaster.SendMessage("GetBallLoc",ball_loc);
-			//levelmaster.SendMessage("CurrentObjectManager");
-			//levelmaster.SendMessage("TimeScaleManager", 0f);
 
-			if(GameOver == true)
-			{
-				//animator.SetInteger("BallState",1);
-			}
 			yield return new WaitForSeconds(0.7f);
 
 			Destroy(gameObject);
