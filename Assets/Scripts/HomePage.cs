@@ -5,10 +5,14 @@ public class HomePage : MonoBehaviour {
 	public GUITexture playbutton;
 	public GUITexture ratingstar;
 	public GUITexture leaderboard;
+	public GUITexture facebookbutton;
+	GameObject facebookobject;
 	//public AudioClip mainmenumusic;
 	// Use this for initialization
+
 	void Start () {
 		audio.Play();
+		facebookobject = GameObject.FindGameObjectWithTag("FacebookObject");
 	}
 	
 	// Update is called once per frame
@@ -22,14 +26,20 @@ public class HomePage : MonoBehaviour {
 			}
 			if(leaderboard.HitTest(Input.GetTouch(0).position))
 			{
-
+				Application.LoadLevel("LeaderBoardScene");
 			}
 
 			if(ratingstar.HitTest(Input.GetTouch(0).position))
 			{
 				Application.OpenURL ("http://www.google.com");
 			}
-		}
+
+			if(facebookbutton.HitTest(Input.GetTouch(0).position))
+			{
+				audio.Play();
+				facebookobject.SendMessage("facebookLogin",SendMessageOptions.DontRequireReceiver);
+			}
+
 		if (Application.platform == RuntimePlatform.Android)
 		{
 			if(Input.GetKeyDown(KeyCode.Escape))
@@ -38,11 +48,13 @@ public class HomePage : MonoBehaviour {
 			}
 		}
 	}
+#if UNITY_EDITOR
+		if(Input.GetKey(KeyCode.E))
+		   {
+			Application.LoadLevel("MainLevelDemo");
+			}
+#endif
 
-	/* void OnGUI()
-	{
-		//GUI.skin = mainmenugui;
-		if(GUI.Button(new Rect(50,50,100,20),"Hello"))
-			GT.SetActive(true);
-	}*/
-}
+	
+
+	}}

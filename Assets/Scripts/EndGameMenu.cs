@@ -14,19 +14,31 @@ public class EndGameMenu : MonoBehaviour {
 	//public GameObject scoreobject;
 	int score,bestscore;
 	GameObject googleadsobject;
+	FacebookObject facebookobject;
+	GameStateManager gamestatemanager;
 	// Use this for initialization
 	void Awake()
 	{
 		//scoreobject = GameObject.FindGameObjectWithTag("ScoreObject");
 		//this.Score = scoreobject.GetComponent("score").score;
 
-		score = PlayerPrefs.GetInt("Score");
-		bestscore = PlayerPrefs.GetInt("BestScore");
+		/*
+		if(FB.IsLoggedIn)
+		{
+		facebookobject = (FacebookObject) GameObject.FindGameObjectWithTag("FacebookObject").GetComponent("FacebookObject");
+		
+		}
+		else
+		{
+			bestscore = 0;
+		}
+		*/
+		gamestatemanager = (GameStateManager) GameObject.FindGameObjectWithTag("GameStateManager").GetComponent("GameStateManager");
 	}
 
 	void Start () {
-		scorecard.text = score.ToString();
-		bestcard.text = bestscore.ToString();
+		scorecard.text = GameStateManager.Score.ToString();
+		bestcard.text = GameStateManager.myBest.ToString();
 		finalSize = (float) Screen.width/ratio;
 		bestcard.fontSize = (int) finalSize;
 		scorecard.fontSize = (int) finalSize;
@@ -48,6 +60,11 @@ public class EndGameMenu : MonoBehaviour {
 				googleadsobject.SendMessage("addPlayCount",SendMessageOptions.DontRequireReceiver);
 				googleadsobject.SendMessage("hideBannerAd",SendMessageOptions.DontRequireReceiver);
 				googleadsobject.SendMessage("destroyBannerAd",SendMessageOptions.DontRequireReceiver);
+				//Reset Game Score
+				GameStateManager.Score = 0;
+				//Retrieving score from facebook
+				gamestatemanager.getScore();
+
 				Application.LoadLevel("MainLevelDemo");
 			}
 			if(leaderboard.HitTest(Input.GetTouch(0).position))

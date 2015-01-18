@@ -48,6 +48,22 @@
   <ItemGroup>
      <Compile Include="Assets\AdCaller.cs" />
      <Compile Include="Assets\Beeper.cs" />
+     <Compile Include="Assets\Examples\Scripts\ConsoleBase.cs" />
+     <Compile Include="Assets\Examples\Scripts\GameGroupsConsole.cs" />
+     <Compile Include="Assets\Examples\Scripts\InteractiveConsole.cs" />
+     <Compile Include="Assets\Facebook\Scripts\AndroidFacebook.cs" />
+     <Compile Include="Assets\Facebook\Scripts\AndroidFacebookLoader.cs" />
+     <Compile Include="Assets\Facebook\Scripts\CanvasFacebookLoader.cs" />
+     <Compile Include="Assets\Facebook\Scripts\EditorFacebook.cs" />
+     <Compile Include="Assets\Facebook\Scripts\EditorFacebookAccessToken.cs" />
+     <Compile Include="Assets\Facebook\Scripts\EditorFacebookLoader.cs" />
+     <Compile Include="Assets\Facebook\Scripts\FB.cs" />
+     <Compile Include="Assets\Facebook\Scripts\FBAppRequestsFilterGroup.cs" />
+     <Compile Include="Assets\Facebook\Scripts\FBScreen.cs" />
+     <Compile Include="Assets\Facebook\Scripts\FBSettings.cs" />
+     <Compile Include="Assets\Facebook\Scripts\IOSFacebook.cs" />
+     <Compile Include="Assets\Facebook\Scripts\IOSFacebookLoader.cs" />
+     <Compile Include="Assets\Facebook\Scripts\NativeDialogModes.cs" />
      <Compile Include="Assets\GUITextloc.cs" />
      <Compile Include="Assets\GoogleMobileAds\Api\AdFailedToLoadEventArgs.cs" />
      <Compile Include="Assets\GoogleMobileAds\Api\AdPosition.cs" />
@@ -69,21 +85,25 @@
      <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\IOSBannerClient.cs" />
      <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\IOSInterstitialClient.cs" />
      <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\MonoPInvokeCallbackAttribute.cs" />
-     <Compile Include="Assets\Lightning.cs" />
      <Compile Include="Assets\ScoreObject.cs" />
      <Compile Include="Assets\Scripts\DestroyPlane.cs" />
      <Compile Include="Assets\Scripts\EndGameMenu.cs" />
+     <Compile Include="Assets\Scripts\FacebookObject.cs" />
      <Compile Include="Assets\Scripts\GUIAspectRatio.cs" />
+     <Compile Include="Assets\Scripts\GameStateManager.cs" />
      <Compile Include="Assets\Scripts\GnT.cs" />
      <Compile Include="Assets\Scripts\GoogleMobileAdsScript.cs" />
      <Compile Include="Assets\Scripts\HomePage.cs" />
+     <Compile Include="Assets\Scripts\LeaderBoardMaker.cs" />
      <Compile Include="Assets\Scripts\LevelMaster.cs" />
+     <Compile Include="Assets\Scripts\Lightning.cs" />
      <Compile Include="Assets\Scripts\Pipe.cs" />
+     <Compile Include="Assets\Scripts\SplashScreenLoserBaby.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
      <Compile Include="Assets\Scripts\Tutorial.cs" />
+     <Compile Include="Assets\Scripts\Util.cs" />
      <Compile Include="Assets\Scripts\fbintegrate.cs" />
      <Compile Include="Assets\Scripts\player_Controller.cs" />
-     <Compile Include="Assets\SplashScreenLoserBaby.cs" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-lv\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\drawable\common_signin_btn_icon_dark.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_usersettingsfragment.xml" />
@@ -228,6 +248,9 @@
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-fi\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-en-rIN\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-pt-rBR\common_strings.xml" />
+ <Reference Include="IFacebook">
+ <HintPath>C:/Unity Projects/Buzzinga Atom/Buzzinga/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

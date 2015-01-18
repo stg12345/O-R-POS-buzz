@@ -39,7 +39,7 @@ public class player_Controller : MonoBehaviour {
 			{
 				levelmaster.SendMessage("SetGameBeganVariable");
 				gamebeginmsgsent = true;
-				levelmaster.resetScore();
+				//levelmaster.resetScore();
 
 			}
 		}
@@ -82,13 +82,13 @@ public class player_Controller : MonoBehaviour {
 			Handheld.Vibrate();
 			GameOver = true;
 			levelmaster.SendMessage("setGameOver");
-			PlayerPrefs.Save();
+			//PlayerPrefs.Save();
 
 			yield return new WaitForSeconds(0.7f);
 
 			Destroy(gameObject);
 			levelmaster.SendMessage("LoadLoserBaby");
-			GameObject.Destroy(levelmaster);
+			//GameObject.Destroy(levelmaster);
 			}
 
 		/*if(other.gameObject.layer ==12)

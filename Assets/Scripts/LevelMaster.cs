@@ -15,8 +15,8 @@ public class LevelMaster : MonoBehaviour {
 	int ballcounter = 1;
 	bool gameover = false;
 	//public GameObject jumpobj;
-	int score;
-	public string Score = "0";
+	//int score;
+	//public string Score = "0";
 	//public List<GameObject> currentobjects = new List<GameObject>();
 	public GameObject lightning;
 	//public GUIText scorecard1;
@@ -28,48 +28,56 @@ public class LevelMaster : MonoBehaviour {
 	public static string Username;
 	public static Texture UserTexture;
 	bool gamebegan = false;
-	public GUIStyle SCStyle; //Score Styling for numbers
+	 //Score Styling for numbers
 	//Vector2 offset = new Vectorload2(2,2 );
 	float ratio = 10;
-	TextAsset highscore;
+	//TextAsset highscore;
 	//public GameObject scoreobject;
-	public int bestscore;
+	//public int bestscore;
 	public Object[] pipeobjectsarray;
 	float stopspeed=0;
 	float startspeed = 0.7f;
 	public GameObject googleadsobject;
-
+	GameStateManager gamestatemanager;
+	public GUIStyle SCStyle;
 //	string FileLoc = "\Resources\HighScores.txt";
 	// Use this for initialization
 	void Awake()
 	{
 		DontDestroyOnLoad(this);
-		bestscore = PlayerPrefs.GetInt("BestScore");
-
+		//bestscore = PlayerPrefs.GetInt("BestScore");
 	}
 	void Start () {
-		score = 0;
+		//score = 0;
 		counter = 4;
 		Time.timeScale = 1;
 		//ParentPipe = GameObject.FindGameObjectWithTag("ParentPipe");
 		//lastInstantiated = GameObject.FindGameObjectWithTag("LastInstantiated");
 		//scorecard = (GUIText)GameObject.FindGameObjectWithTag("scorecard");
+
 		float finalSize = (float)Screen.width/ratio;
 		//scorecard1.fontSize = (int) finalSize;
 		//scorecard1.pixelOffset =  new Vector2(Screen.width/offset.x, Screen.height/offset.y);
 		//scoreboard.transform.position = new Vector2(Screen.width/, Screen.height*0.2f);
-		 SCStyle.fontSize = (int) finalSize;
+		SCStyle.fontSize = (int) finalSize;
+
 	 	pipeobjectsarray = FindObjectsOfType (typeof(Pipe));
-		foreach (Pipe go in pipeobjectsarray) {
+		foreach (Pipe go in pipeobjectsarray)
+		{
 			go.SendMessage ("UpdateSpeed",stopspeed);
-	}
+		}
+
+		gamestatemanager = (GameStateManager) GameObject.FindGameObjectWithTag("GameStateManager").GetComponent("GameStateManager");
+
 		googleadsobject = GameObject.FindGameObjectWithTag("GoogleAdsObject");
 		googleadsobject.SendMessage("requestInterstitialAd", SendMessageOptions.DontRequireReceiver);
+
+
+
 	}
 	// Update is called once per frame
 	void Update () 
 	{
-
 		if(counter < 4)
 		{
 			Vector2 ipos = GetPosition();
@@ -99,6 +107,7 @@ public class LevelMaster : MonoBehaviour {
 				GameObject.DestroyObject(scrollupimg);
 				GameObject.DestroyObject(scrollimg);
 				GameObject.DestroyObject(scrolldownimg);
+
 			}
 
 
@@ -214,42 +223,22 @@ public class LevelMaster : MonoBehaviour {
 		//googleadsobject.SendMessage("requestInterstitialAd", SendMessageOptions.DontRequireReceiver);
 		//googleadsobject.SendMessage("RequestBanner", SendMessageOptions.DontRequireReceiver);
 
+		gamestatemanager.getScore();
 		Application.LoadLevel("LoserBaby");
 		googleadsobject.SendMessage("displayInterstitialAd", SendMessageOptions.DontRequireReceiver);
 
 	}
 
-	void AddScore()
-	{
-		score += 1;
-		//scorecard1.text = score.ToString();
-		//Debug.Log(score);
-		Score = score.ToString();
 
-		//scoreobject.SendMessage("UpdateScore",Score);
-		PlayerPrefs.SetInt("Score",score);
-		if(bestscore < score)
-		{
-			bestscore = score;
-			PlayerPrefs.SetInt("BestScore", bestscore);
-			PlayerPrefs.Save();
-		}
-	}
-
+/*
 	public void resetScore()
 	{
 		this.score = 0;
 	}
+*/
 
 
-	void OnGUI()
-	{
 
-		if(gameover ==  false)
-		{
-			GUI.Label(new Rect(Screen.width*0.2f, Screen.height*0.08f, Screen.width*0.2f, Screen.height*0.1f),Score, (SCStyle));
-		}
-	}
 
 	/*void ChangePosition(Vector2 v)
 	{
@@ -257,6 +246,14 @@ public class LevelMaster : MonoBehaviour {
 		Debug.Log("Change Pos");
 	}*/
 
-
+	void OnGUI()
+	{
+		
+		if(gameover ==  false)
+		{
+		
+			GUI.Label(new Rect(Screen.width*0.2f, Screen.height*0.08f, Screen.width*0.2f, Screen.height*0.1f),GameStateManager.Score.ToString(), (SCStyle));
+		}
+	}
 
 }
