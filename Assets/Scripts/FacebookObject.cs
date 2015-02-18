@@ -15,11 +15,12 @@ public class FacebookObject : MonoBehaviour {
 	private float popupDuration;
 	private float ChallengeDisplayTime;
 	private static Dictionary<string, string> profile = null;
-	public GameObject gsm;
+	public GameStateManager gsm;
 
 	void Awake()
 	{
 		DontDestroyOnLoad(this);
+		gsm = (GameStateManager) GameObject.FindGameObjectWithTag("GameStateManager").GetComponent("GameStateManager");
 		FB.Init(SetInit, OnHideUnity);
 		ChallengeDisplayTime = 3.4f;
 	}
@@ -42,6 +43,10 @@ public class FacebookObject : MonoBehaviour {
 #endif
 	}
 
+	void Start()
+	{
+
+	}
 
 	public void facebookLogin()
 	{
@@ -68,7 +73,7 @@ public class FacebookObject : MonoBehaviour {
 	protected void FBLogin()
 	{
 
-		FB.Login("publish_actions,user_about_me,user_games_activity,friends_games_activity", AuthCallBack);
+		FB.Login("publish_actions,user_about_me,user_friends", AuthCallBack);
 	}
 
 	protected void AuthCallBack(FBResult result)
@@ -109,7 +114,7 @@ public class FacebookObject : MonoBehaviour {
 
 		//debuggertext.text = "reached debugger text";
 		//friends = Util.DeserializeJSONFriends(result.Text);
-
+		gsm.getScore();
 		//setScore(UnityEngine.Random.Range(20,40));
 	}                                                                                                                              
 
@@ -217,13 +222,13 @@ public class FacebookObject : MonoBehaviour {
 
 	}
 
-	private void onBragClicked()                                                                                                 
+	public  void onBragClicked()                                                                                                 
 	{                                                                                                                            
 		Util.Log("onBragClicked");                                                                                            
 		FB.Feed(                                                                                                                 
 		        linkCaption: "I just scored " + GameStateManager.Score.ToString() + " ! Can you beat it?",               
-		        picture: "http://www.friendsmash.com/images/logo_large.jpg",                                                     
-		        linkName: "Checkout my Buzzinga greatness!",                                                                 
+		        picture: "http://s16.postimg.org/jpop2b2gl/icon.png",                                                     
+		        linkName: "Checkout my score on Buzzinga",                                                                 
 		        link: "http://apps.facebook.com/" + FB.AppId + "/?challenge_brag=" + (FB.IsLoggedIn ? FB.UserId : "guest")       
 		        );                                                                                                               
 	}

@@ -53,7 +53,12 @@ public class HomePage : MonoBehaviour {
 		   {
 			Application.LoadLevel("MainLevelDemo");
 			}
-#endif
+		if (playbutton.HitTest(Input.mousePosition))
+		{
+			//testtouch.text = "touched";
+			Application.LoadLevel("MainLevelDemo");
+		}
+		#endif
 
 	
 

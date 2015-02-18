@@ -8,7 +8,7 @@ public class GameStateManager : MonoBehaviour {
 	public static Texture UserTexture;
 	public static string Username;
 	public static int Score;
-	public static int myBest = 0;
+	public static int myBest;
 	FacebookObject facebookobject;
 	// Use this for initialization
 
@@ -18,12 +18,11 @@ public class GameStateManager : MonoBehaviour {
 	}
 	void Start () {
 		facebookobject = (FacebookObject) GameObject.FindGameObjectWithTag("FacebookObject").GetComponent("FacebookObject");
-	
-	}
+		}
 	
 	// Update is called once per frame
 	void Update () {
-		StartCoroutine("bestScoreUpdater");
+		//StartCoroutine("bestScoreUpdater");
 	}
 
 	public void setScore(int s)
@@ -57,7 +56,18 @@ public class GameStateManager : MonoBehaviour {
 			string userId = (string)user["id"];
 			if (string.Equals(userId,FB.UserId))
 			{
-				myBest = Int32.Parse(myScore);
+				if(myScore.Equals("0"))
+				{
+					myBest= 10000;
+					Debug.Log(name+"OK"+myBest+"score:"+myScore);
+				}
+				else
+				{
+					myBest = Int32.Parse(myScore);
+					Debug.Log(name+"OK"+myBest+"score:"+myScore);
+				}
+				//myBest = myScore;
+
 			}
 			Debug.Log(name+"OK"+myBest+"score:"+myScore);
 		}
@@ -68,13 +78,14 @@ public class GameStateManager : MonoBehaviour {
 		
 	}
 
-	public void AddScore()
+	public void AddScoreFbLoggedIn()
 	{
+
 		Score += 1;
 		//scorecard1.text = score.ToString();
 		//Debug.Log(score);
 		//Score = score.ToString();
-		
+
 		//scoreobject.SendMessage("UpdateScore",Score);
 		//PlayerPrefs.SetInt("Score",score);
 		if(FB.IsLoggedIn)
@@ -87,6 +98,11 @@ public class GameStateManager : MonoBehaviour {
 		}
 	}
 
+	public void AddScore()
+	{
+		Score += 1;
+	}
+
 	IEnumerable bestScoreUpdater()
 	{
 
@@ -97,6 +113,8 @@ public class GameStateManager : MonoBehaviour {
 		}
 
 		yield return new WaitForSeconds(5);
+
+
 	}
 
 

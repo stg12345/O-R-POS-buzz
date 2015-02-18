@@ -5,6 +5,7 @@ public class EndGameMenu : MonoBehaviour {
 	public GUITexture newgame;
 	//public GUITexture continuegame;
 	public GUITexture leaderboard;
+	public GUITexture facebookshare;
 	//public GameObject levelmaster;
 	public GUIStyle style;
 	float ratio = 10;
@@ -34,11 +35,20 @@ public class EndGameMenu : MonoBehaviour {
 		}
 		*/
 		gamestatemanager = (GameStateManager) GameObject.FindGameObjectWithTag("GameStateManager").GetComponent("GameStateManager");
+		facebookobject = (FacebookObject) GameObject.FindGameObjectWithTag("FacebookObject").GetComponent("FacebookObject");
 	}
 
 	void Start () {
 		scorecard.text = GameStateManager.Score.ToString();
-		bestcard.text = GameStateManager.myBest.ToString();
+		if(GameStateManager.myBest == 10000)
+		{
+			bestcard.text = "Login to save";
+		}
+		else if(GameStateManager.myBest < 10000)
+		{
+			bestcard.text = GameStateManager.myBest.ToString();
+		}
+
 		finalSize = (float) Screen.width/ratio;
 		bestcard.fontSize = (int) finalSize;
 		scorecard.fontSize = (int) finalSize;
@@ -71,6 +81,12 @@ public class EndGameMenu : MonoBehaviour {
 			{
 				
 			}
+			if(facebookshare.HitTest(Input.GetTouch(0).position))
+			{
+				facebookobject.onBragClicked();
+			}
+
+
 			/*if (continuegame.HitTest(Input.GetTouch(0).position))
 			{
 				//levelmaster.SendMessage("GameResume");
@@ -84,6 +100,13 @@ public class EndGameMenu : MonoBehaviour {
 				Application.Quit();
 			}
 		}
+		#if UNITY_EDITOR
+		if(facebookshare.HitTest(Input.mousePosition))
+		{
+			Debug.Log("facebookShare");
+			facebookobject.onBragClicked();
+		}
+		#endif
 	}
 
 
