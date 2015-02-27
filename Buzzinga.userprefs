@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LeaderBoardMaker.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\GoogleAdsTest\Assets\GoogleMobileAdsDemoScript.cs">
     <Files>
-      <File FileName="Assets\Scripts\LeaderBoardMaker.cs" Line="34" Column="2" />
+      <File FileName="..\..\GoogleAdsTest\Assets\GoogleMobileAdsDemoScript.cs" Line="67" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

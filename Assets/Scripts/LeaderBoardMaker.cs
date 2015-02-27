@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LeaderBoardMaker : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class LeaderBoardMaker : MonoBehaviour {
 	public float ratio;
 	// Use this for initialization
 	void Start () {
+		getLeaderBoard();
 		photorect = new Rect (Screen.width * 5/100, Screen.height *10/100, Screen.width * 10/100,Screen.height *20/100);
 		namerect = new Rect (Screen.width * 23/100, Screen.height *10/100, Screen.width * 40/100,Screen.height *50/100);
 		scorerect = new Rect (Screen.width * 72/100, Screen.height *10/100, Screen.width * 10/100,Screen.height *10/100);
@@ -38,4 +40,25 @@ public class LeaderBoardMaker : MonoBehaviour {
 		GUI.Label(namerect,"Full Name Here",guistyle);
 		GUI.Label(scorerect,"Score",guistyle);
 	}
+
+	void getLeaderBoard()
+	{
+		FB.API("app/scores", Facebook.HttpMethod.GET, CallbackAllScores);
+	}
+
+	void CallbackAllScores(FBResult result)
+	{
+		//FriendScores = new List<object>();
+		List<object> FriendScoresList = Util.DeserializeScores(result.Text);
+
+		foreach(object score in FriendScoresList)
+		{
+			bool fbScoreExists = false;
+			var entry = (Dictionary<string,object>) score;
+			var user = (Dictionary<string,object>) entry["user"];
+			string name = (string)user["name"];
+			string userId = (string)user["id"];
+			Debug.Log(name+":"+userId);
+	}
+}
 }

@@ -58,8 +58,23 @@ public class HomePage : MonoBehaviour {
 			//testtouch.text = "touched";
 			Application.LoadLevel("MainLevelDemo");
 		}
+
+		if(Input.GetKey(KeyCode.L))
+		{
+			Application.LoadLevel("LeaderboardScene");
+		}
 		#endif
 
 	
 
-	}}
+	}
+
+void OnGUI()
+	{
+		if(GUI.Button(new Rect(50,50,100,100),"Logout"))
+		{
+			FB.Logout();
+		}
+	}
+
+}
