@@ -35,11 +35,11 @@ public class Lightning : MonoBehaviour {
 		if (scoresubmitted == false)
 		{
 				AudioSource.PlayClipAtPoint(lightningpickup,this.transform.position);
-				if(FB.IsLoggedIn)
+				/*if(FB.IsLoggedIn)
 				{
 					gamestatemanager.AddScoreFbLoggedIn();
 				}
-				else
+				else*/
 				{
 					gamestatemanager.AddScore();
 				}

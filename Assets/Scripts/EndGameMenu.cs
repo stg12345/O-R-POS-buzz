@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 public class EndGameMenu : MonoBehaviour {
 	public GUITexture newgame;
 	//public GUITexture continuegame;
@@ -15,6 +16,7 @@ public class EndGameMenu : MonoBehaviour {
 	//public GameObject scoreobject;
 	int score,bestscore;
 	GameObject googleadsobject;
+	string leaderboardid = "CgkIvoKJga8GEAIQAg";
 	FacebookObject facebookobject;
 	GameStateManager gamestatemanager;
 	// Use this for initialization
@@ -36,18 +38,23 @@ public class EndGameMenu : MonoBehaviour {
 		*/
 		gamestatemanager = (GameStateManager) GameObject.FindGameObjectWithTag("GameStateManager").GetComponent("GameStateManager");
 		facebookobject = (FacebookObject) GameObject.FindGameObjectWithTag("FacebookObject").GetComponent("FacebookObject");
+		Social.ReportScore(GameStateManager.myBest,leaderboardid,(bool success) =>
+		{
+			
+		});
 	}
 
 	void Start () {
 		scorecard.text = GameStateManager.Score.ToString();
-		if(GameStateManager.myBest == 10000)
+		bestcard.text = GameStateManager.myBest.ToString();
+		/*if(GameStateManager.myBest == 10000)
 		{
 			bestcard.text = "Login to save";
 		}
 		else if(GameStateManager.myBest < 10000)
 		{
 			bestcard.text = GameStateManager.myBest.ToString();
-		}
+		}*/
 
 		finalSize = (float) Screen.width/ratio;
 		bestcard.fontSize = (int) finalSize;
@@ -73,13 +80,13 @@ public class EndGameMenu : MonoBehaviour {
 				//Reset Game Score
 				GameStateManager.Score = 0;
 				//Retrieving score from facebook
-				gamestatemanager.getScore();
+				//gamestatemanager.getScore();
 
 				Application.LoadLevel("MainLevelDemo");
 			}
 			if(leaderboard.HitTest(Input.GetTouch(0).position))
 			{
-				
+				PlayGamesPlatform.Instance.ShowLeaderboardUI(GameStateManager.leaderboardid);
 			}
 			if(facebookshare.HitTest(Input.GetTouch(0).position))
 			{

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 public class HomePage : MonoBehaviour {
 	public GUITexture playbutton;
@@ -7,12 +9,29 @@ public class HomePage : MonoBehaviour {
 	public GUITexture leaderboard;
 	public GUITexture facebookbutton;
 	GameObject facebookobject;
+	public GUIText googleloginstate;
+
 	//public AudioClip mainmenumusic;
 	// Use this for initialization
 
 	void Start () {
 		audio.Play();
+		PlayGamesPlatform.Activate();
+		googleloginstate.enabled = false;
+
 		facebookobject = GameObject.FindGameObjectWithTag("FacebookObject");
+		Social.localUser.Authenticate((bool success) => 
+		                              {
+			if(!success)
+			{
+				StartCoroutine(popUpTest("Google Login failed..",5));
+			}
+			
+			else
+			{
+				StartCoroutine(popUpTest("Google Logged in Successfully!",5));
+			}
+		});
 	}
 	
 	// Update is called once per frame
@@ -26,7 +45,7 @@ public class HomePage : MonoBehaviour {
 			}
 			if(leaderboard.HitTest(Input.GetTouch(0).position))
 			{
-				Application.LoadLevel("LeaderBoardScene");
+				PlayGamesPlatform.Instance.ShowLeaderboardUI(GameStateManager.leaderboardid);
 			}
 
 			if(ratingstar.HitTest(Input.GetTouch(0).position))
@@ -69,12 +88,13 @@ public class HomePage : MonoBehaviour {
 
 	}
 
-void OnGUI()
+IEnumerator popUpTest(string msg, float delay)
 	{
-		if(GUI.Button(new Rect(50,50,100,100),"Logout"))
-		{
-			FB.Logout();
-		}
+		googleloginstate.fontSize =  Screen.width/30;
+		googleloginstate.text = msg;
+		googleloginstate.enabled = true;
+		yield return new WaitForSeconds(delay);
+		googleloginstate.enabled = false;
 	}
 
 }

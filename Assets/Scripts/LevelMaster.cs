@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 public class LevelMaster : MonoBehaviour {
 	//public GameObject beginner;
@@ -40,6 +42,7 @@ public class LevelMaster : MonoBehaviour {
 	public GameObject googleadsobject;
 	GameStateManager gamestatemanager;
 	public GUIStyle SCStyle;
+	string leaderboardid = "CgkIvoKJga8GEAIQAg";
 //	string FileLoc = "\Resources\HighScores.txt";
 	// Use this for initialization
 	void Awake()
@@ -130,6 +133,10 @@ public class LevelMaster : MonoBehaviour {
 
 	void setGameOver()
 	{
+		Social.ReportScore(GameStateManager.Score,leaderboardid,(bool success) =>
+		{
+			
+		});
 		this.gameover = true;
 
 	}
@@ -223,7 +230,7 @@ public class LevelMaster : MonoBehaviour {
 		//googleadsobject.SendMessage("requestInterstitialAd", SendMessageOptions.DontRequireReceiver);
 		//googleadsobject.SendMessage("RequestBanner", SendMessageOptions.DontRequireReceiver);
 
-		gamestatemanager.getScore();
+		//gamestatemanager.getScore();aaa
 		Application.LoadLevel("LoserBaby");
 		googleadsobject.SendMessage("displayInterstitialAd", SendMessageOptions.DontRequireReceiver);
 

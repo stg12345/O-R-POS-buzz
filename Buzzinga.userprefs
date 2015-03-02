@@ -1,8 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\GoogleAdsTest\Assets\GoogleMobileAdsDemoScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HomePage.cs">
     <Files>
-      <File FileName="..\..\GoogleAdsTest\Assets\GoogleMobileAdsDemoScript.cs" Line="67" Column="2" />
+      <File FileName="Assets\Scripts\HomePage.cs" Line="26" Column="38" />
+      <File FileName="Assets\Scripts\EndGameMenu.cs" Line="42" Column="3" />
+      <File FileName="Assets\Scripts\Lightning.cs" Line="36" Column="4" />
+      <File FileName="Assets\Scripts\GameStateManager.cs" Line="13" Column="58" />
+      <File FileName="Assets\Scripts\LevelMaster.cs" Line="139" Column="6" />
+      <File FileName="Assets\Scripts\FacebookObject.cs" Line="118" Column="47" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

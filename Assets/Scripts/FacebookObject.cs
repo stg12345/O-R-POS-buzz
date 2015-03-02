@@ -114,7 +114,7 @@ public class FacebookObject : MonoBehaviour {
 
 		//debuggertext.text = "reached debugger text";
 		//friends = Util.DeserializeJSONFriends(result.Text);
-		gsm.getScore();
+		//gsm.getScore();
 		//setScore(UnityEngine.Random.Range(20,40));
 	}                                                                                                                              
 

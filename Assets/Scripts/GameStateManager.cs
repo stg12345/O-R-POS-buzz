@@ -10,6 +10,7 @@ public class GameStateManager : MonoBehaviour {
 	public static int Score;
 	public static int myBest;
 	FacebookObject facebookobject;
+	public static string leaderboardid = "CgkIydvG14QMEAIQAQ";
 	// Use this for initialization
 
 	void Awake()
@@ -17,6 +18,9 @@ public class GameStateManager : MonoBehaviour {
 		DontDestroyOnLoad(this);
 	}
 	void Start () {
+		myBest = PlayerPrefs.GetInt("BestScore");
+
+
 		facebookobject = (FacebookObject) GameObject.FindGameObjectWithTag("FacebookObject").GetComponent("FacebookObject");
 		}
 	
@@ -101,6 +105,11 @@ public class GameStateManager : MonoBehaviour {
 	public void AddScore()
 	{
 		Score += 1;
+		if(Score > myBest)
+		{
+			myBest = Score;
+			PlayerPrefs.SetInt("BestScore",Score);
+		}
 	}
 
 	IEnumerable bestScoreUpdater()
