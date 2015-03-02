@@ -16,10 +16,10 @@ public class HomePage : MonoBehaviour {
 
 	void Start () {
 		audio.Play();
-		PlayGamesPlatform.Activate();
-		googleloginstate.enabled = false;
 
+		googleloginstate.enabled = false;
 		facebookobject = GameObject.FindGameObjectWithTag("FacebookObject");
+		PlayGamesPlatform.Activate();
 		Social.localUser.Authenticate((bool success) => 
 		                              {
 			if(!success)
